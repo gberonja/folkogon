@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Folkogon — Hrvatska folklorna digitalna platforma</title>
+<meta name="description" content="Otvorena platforma za dokumentaciju, edukaciju i digitalnu prezentaciju hrvatske folklorne baštine — od notnih zapisa do interaktivnih alata.">
+<meta property="og:title" content="Folkogon — Hrvatska folklorna digitalna platforma">
+<meta property="og:description" content="Otvorena platforma za dokumentaciju, edukaciju i digitalnu prezentaciju hrvatske folklorne baštine.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#F5F0E8">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .hero {
+    min-height: calc(100vh - 70px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-left {
+    padding: 6rem 4rem 4rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--border);
+  }
+
+  .hero-tag {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--red);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-title em { font-style: italic; color: var(--red); }
+
+  .hero-subtitle {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--muted);
+    max-width: 420px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .hero-right {
+    padding: 6rem 3rem 4rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-right::after {
+    content: 'FOLKLOR';
+    position: absolute;
+    bottom: -1.5rem;
+    right: -1rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 7rem;
+    font-weight: 700;
+    color: var(--border);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .stat { border-left: 2px solid var(--red); padding-left: 1.5rem; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-label { font-size: 0.85rem; color: var(--muted); }
+
+  /* HERO ANIMATIONS */
+  .hero-left .hero-tag  { animation: fadeUp 0.5s 0.10s ease forwards; opacity: 0; }
+  .hero-left .hero-title { animation: fadeUp 0.5s 0.22s ease forwards; opacity: 0; }
+  .hero-left .hero-subtitle { animation: fadeUp 0.5s 0.34s ease forwards; opacity: 0; }
+  .hero-left .hero-actions { animation: fadeUp 0.5s 0.46s ease forwards; opacity: 0; }
+  .hero-right { animation: fadeUp 0.5s 0.30s ease forwards; opacity: 0; }
+
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 3rem 1.5rem 2rem; border-right: none; border-bottom: 1px solid var(--border); }
+    .hero-right { padding: 2rem 1.5rem 3rem; }
+    .hero-right::after { font-size: 4rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Folk<span>o</span>gon</a>
+  <ul class="nav-links">
+    <li><a href="projekti.html">Projekti</a></li>
+    <li><a href="note.html">Note</a></li>
+    <li><a href="linkovi.html">Linkovi</a></li>
+    <li><a href="tim.html">Tim</a></li>
+  </ul>
+  <button class="nav-hamburger" id="nav-toggle" aria-label="Otvori izbornik"><span></span><span></span><span></span></button>
+</nav>
+
+<main class="page">
+  <div class="hero">
+    <div class="hero-left">
+      <p class="hero-tag">Hrvatska folklorna digitalna platforma</p>
+      <h1 class="hero-title">Folk<em>o</em>gon</h1>
+      <p class="hero-subtitle">
+        Otvorena platforma za dokumentaciju, edukaciju i digitalnu prezentaciju hrvatske folklorne baštine — od notnih zapisa do interaktivnih alata.
+      </p>
+      <div class="hero-actions">
+        <a href="projekti.html" class="btn btn-dark-filled">Istraži projekte →</a>
+        <a href="note.html" class="btn btn-dark">Notni zapisi</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="stat">
+        <div class="stat-num">HR</div>
+        <div class="stat-label">Hrvatska folklorna tradicija</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Otvoreni pristup svim materijalima</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">+</div>
+        <div class="stat-label">Otvoreni za suradnju</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 Folkogon. Svi materijali pod otvorenom licencom.</p>
+  <p>Izrađeno s ljubavlju prema tradiciji.</p>
+</footer>
+
+<script src="js/nav.js"></script>
+</body>
+</html>

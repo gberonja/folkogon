@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Korisni linkovi — Folkogon</title>
+<meta name="description" content="Korisni resursi i linkovi vezani uz hrvatsku folklornu baštinu, etnomuzikologiju i notografske alate.">
+<meta property="og:title" content="Korisni linkovi — Folkogon">
+<meta property="og:description" content="Korisni resursi i linkovi vezani uz hrvatsku folklornu baštinu, etnomuzikologiju i notografske alate.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#F5F0E8">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<script src="data/sadrzaj.js"></script>
+<style>
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 2rem;
+  }
+
+  .link-category h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .link-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .link-list a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: color 0.2s;
+    line-height: 1.4;
+  }
+
+  .link-list a::before {
+    content: '→';
+    color: var(--red);
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  .link-list a:hover { color: var(--red); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Folk<span>o</span>gon</a>
+  <ul class="nav-links">
+    <li><a href="projekti.html">Projekti</a></li>
+    <li><a href="note.html">Note</a></li>
+    <li><a href="linkovi.html" class="active">Linkovi</a></li>
+    <li><a href="tim.html">Tim</a></li>
+  </ul>
+  <button class="nav-hamburger" id="nav-toggle" aria-label="Otvori izbornik"><span></span><span></span><span></span></button>
+</nav>
+
+<main class="page">
+  <div class="page-header">
+    <span class="page-num">03</span>
+    <h1 class="page-title">Korisni linkovi</h1>
+  </div>
+  <div class="content">
+    <div class="links-grid" id="links-grid"></div>
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 Folkogon.</p>
+  <p><a href="index.html" style="color:var(--muted); text-decoration:none;">← Početna</a></p>
+</footer>
+
+<script>
+  const grid = document.getElementById('links-grid');
+
+  LINKOVI.forEach((kat, i) => {
+    const div = document.createElement('div');
+    div.className = 'link-category fade-up';
+
+    const stavke = kat.stavke.map(s =>
+      `<li><a href="${s.url}" target="_blank" rel="noopener">${s.naziv}</a></li>`
+    ).join('');
+
+    div.innerHTML = `
+      <h3>${kat.kategorija}</h3>
+      <ul class="link-list">${stavke}</ul>
+    `;
+    grid.appendChild(div);
+  });
+</script>
+
+<script src="js/nav.js"></script>
+</body>
+</html>

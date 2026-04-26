@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stranica nije pronađena — Folkogon</title>
+<meta name="description" content="Tražena stranica nije pronađena.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F5F0E8">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .error-page {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    gap: 1.5rem;
+  }
+
+  .error-num {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(6rem, 20vw, 12rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--border);
+    letter-spacing: -0.04em;
+  }
+
+  .error-num span { color: var(--red); }
+
+  .error-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .error-desc {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.75;
+    max-width: 380px;
+  }
+
+  .error-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Folk<span>o</span>gon</a>
+  <ul class="nav-links">
+    <li><a href="projekti.html">Projekti</a></li>
+    <li><a href="note.html">Note</a></li>
+    <li><a href="linkovi.html">Linkovi</a></li>
+    <li><a href="tim.html">Tim</a></li>
+  </ul>
+  <button class="nav-hamburger" id="nav-toggle" aria-label="Otvori izbornik"><span></span><span></span><span></span></button>
+</nav>
+
+<main class="page">
+  <div class="error-page">
+    <div class="error-num">4<span>0</span>4</div>
+    <h1 class="error-title">Stranica nije pronađena</h1>
+    <p class="error-desc">Tražena stranica ne postoji ili je premještena. Možda ste unijeli pogrešan URL.</p>
+    <div class="error-actions">
+      <a href="index.html" class="btn btn-dark-filled">← Početna stranica</a>
+      <a href="projekti.html" class="btn btn-dark">Istraži projekte</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>© 2025 Folkogon. Svi materijali pod otvorenom licencom.</p>
+  <p>Izrađeno s ljubavlju prema tradiciji.</p>
+</footer>
+
+<script src="js/nav.js"></script>
+</body>
+</html>

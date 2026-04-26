@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notni zapisi — Folkogon</title>
+<meta name="description" content="Digitalni arhiv notnih zapisa hrvatske folklorne glazbe s mogućnošću besplatnog preuzimanja u PDF i MusicXML formatu.">
+<meta property="og:title" content="Notni zapisi — Folkogon">
+<meta property="og:description" content="Digitalni arhiv notnih zapisa hrvatske folklorne glazbe s mogućnošću besplatnog preuzimanja u PDF i MusicXML formatu.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#F5F0E8">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<script src="data/notes.js"></script>
+<style>
+  .filter-bar {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    align-items: center;
+  }
+
+  .filter-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .filter-btn {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--border);
+    background: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active {
+    border-color: var(--red);
+    color: var(--red);
+  }
+
+  .scores-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .scores-table thead tr {
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .scores-table th {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .scores-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  .scores-table tbody tr:hover { background: #EDE8DE; }
+  .scores-table tbody tr.hidden { display: none; }
+
+  .scores-table td {
+    padding: 1.1rem 1rem;
+    font-size: 0.95rem;
+    vertical-align: middle;
+  }
+
+  .score-naziv {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+  }
+
+  .score-regija {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 0.15rem;
+  }
+
+  .dl-links { display: flex; gap: 0.5rem; }
+
+  .dl-btn {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.75rem;
+    text-decoration: none;
+    border: 1px solid;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  .dl-btn.pdf { border-color: var(--red); color: var(--red); }
+  .dl-btn.pdf:hover { background: var(--red); color: var(--cream); }
+  .dl-btn.xml { border-color: var(--gold); color: var(--gold); }
+  .dl-btn.xml:hover { background: var(--gold); color: var(--cream); }
+  .dl-btn.disabled { border-color: var(--border); color: var(--border); pointer-events: none; }
+
+  .count {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .scores-table th:nth-child(2),
+    .scores-table td:nth-child(2),
+    .scores-table th:nth-child(3),
+    .scores-table td:nth-child(3) { display: none; }
+    .dl-links { flex-wrap: wrap; }
+    .scores-table td { padding: 0.9rem 0.75rem; }
+    .scores-table th { padding: 0.6rem 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Folk<span>o</span>gon</a>
+  <ul class="nav-links">
+    <li><a href="projekti.html">Projekti</a></li>
+    <li><a href="note.html" class="active">Note</a></li>
+    <li><a href="linkovi.html">Linkovi</a></li>
+    <li><a href="tim.html">Tim</a></li>
+  </ul>
+  <button class="nav-hamburger" id="nav-toggle" aria-label="Otvori izbornik"><span></span><span></span><span></span></button>
+</nav>
+
+<main class="page">
+  <div class="page-header">
+    <span class="page-num">02</span>
+    <h1 class="page-title">Notni zapisi</h1>
+  </div>
+  <div class="content">
+
+    <div class="filter-bar">
+      <span class="filter-label">Regija:</span>
+      <button class="filter-btn active" data-regija="sve">Sve</button>
+      <div id="regija-filters"></div>
+    </div>
+
+    <p class="count" id="count"></p>
+
+    <div style="overflow-x:auto;">
+    <table class="scores-table">
+      <thead>
+        <tr>
+          <th>Naziv napjeva</th>
+          <th>Regija</th>
+          <th>Zapis</th>
+          <th>Preuzimanje</th>
+        </tr>
+      </thead>
+      <tbody id="scores-body"></tbody>
+    </table>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 Folkogon.</p>
+  <p><a href="index.html" style="color:var(--muted); text-decoration:none;">← Početna</a></p>
+</footer>
+
+<script>
+  const tbody = document.getElementById('scores-body');
+  const countEl = document.getElementById('count');
+  const regijaFilters = document.getElementById('regija-filters');
+
+  // Izvuci jedinstvene regije
+  const regije = [...new Set(NOTES.map(n => n.regija))].sort();
+
+  regije.forEach(r => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.dataset.regija = r;
+    btn.textContent = r;
+    btn.addEventListener('click', () => filterBy(r, btn));
+    regijaFilters.appendChild(btn);
+  });
+
+  // Render rows
+  NOTES.forEach(n => {
+    const tr = document.createElement('tr');
+    tr.dataset.regija = n.regija;
+    tr.className = 'fade-up';
+
+    const pdfBtn = n.pdf
+      ? `<a href="${n.pdf}" target="_blank" class="dl-btn pdf">PDF</a>`
+      : `<span class="dl-btn disabled">PDF</span>`;
+
+    const xmlBtn = n.xml
+      ? `<a href="${n.xml}" target="_blank" class="dl-btn xml">MusicXML</a>`
+      : `<span class="dl-btn disabled">XML</span>`;
+
+    tr.innerHTML = `
+      <td>
+        <div class="score-naziv">${n.naziv}</div>
+        <div class="score-regija">${n.regija} · ${n.godina}</div>
+      </td>
+      <td style="color:var(--muted); font-size:0.88rem;">${n.regija}</td>
+      <td style="color:var(--muted); font-size:0.85rem;">${n.zapis}</td>
+      <td><div class="dl-links">${pdfBtn}${xmlBtn}</div></td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  updateCount();
+
+  function filterBy(regija, clickedBtn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    clickedBtn.classList.add('active');
+
+    document.querySelectorAll('#scores-body tr').forEach(tr => {
+      if (regija === 'sve' || tr.dataset.regija === regija) {
+        tr.classList.remove('hidden');
+      } else {
+        tr.classList.add('hidden');
+      }
+    });
+    updateCount();
+  }
+
+  document.querySelector('[data-regija="sve"]').addEventListener('click', function() {
+    filterBy('sve', this);
+  });
+
+  function updateCount() {
+    const visible = document.querySelectorAll('#scores-body tr:not(.hidden)').length;
+    countEl.textContent = `${visible} ${visible === 1 ? 'zapis' : 'zapisa'}`;
+  }
+</script>
+
+<script src="js/nav.js"></script>
+</body>
+</html>

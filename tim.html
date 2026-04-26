@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tim — Folkogon</title>
+<meta name="description" content="Upoznajte mali tim entuzijasta iza Folkogon platforme koji spaja glazbu, tehnologiju i ljubav prema tradiciji.">
+<meta property="og:title" content="Tim — Folkogon">
+<meta property="og:description" content="Upoznajte mali tim entuzijasta iza Folkogon platforme koji spaja glazbu, tehnologiju i ljubav prema tradiciji.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#F5F0E8">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<script src="data/sadrzaj.js"></script>
+<style>
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .team-card {
+    padding: 2.2rem;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    transition: border-color 0.2s;
+  }
+
+  .team-card:hover { border-color: var(--red); }
+
+  .team-avatar {
+    width: 60px;
+    height: 60px;
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--cream);
+    font-style: italic;
+    margin-bottom: 0.4rem;
+    flex-shrink: 0;
+  }
+
+  .team-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .team-role {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    font-weight: 500;
+  }
+
+  .team-bio {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .team-intro {
+    max-width: 560px;
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 3rem;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Folk<span>o</span>gon</a>
+  <ul class="nav-links">
+    <li><a href="projekti.html">Projekti</a></li>
+    <li><a href="note.html">Note</a></li>
+    <li><a href="linkovi.html">Linkovi</a></li>
+    <li><a href="tim.html" class="active">Tim</a></li>
+  </ul>
+  <button class="nav-hamburger" id="nav-toggle" aria-label="Otvori izbornik"><span></span><span></span><span></span></button>
+</nav>
+
+<main class="page">
+  <div class="page-header">
+    <span class="page-num">04</span>
+    <h1 class="page-title">Tim</h1>
+  </div>
+  <div class="content">
+    <p class="team-intro">
+      Folkogon je mali tim entuzijasta koji spaja glazbu, tehnologiju i ljubav prema hrvatskoj folklorno-glazbenoj baštini.
+    </p>
+    <div class="team-grid" id="team-grid"></div>
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 Folkogon.</p>
+  <p><a href="index.html" style="color:var(--muted); text-decoration:none;">← Početna</a></p>
+</footer>
+
+<script>
+  const grid = document.getElementById('team-grid');
+
+  TIM.forEach((clan, i) => {
+    const card = document.createElement('div');
+    card.className = 'team-card fade-up';
+    card.innerHTML = `
+      <div class="team-avatar">${clan.inicijal}</div>
+      <div class="team-name">${clan.ime}</div>
+      <div class="team-role">${clan.uloga}</div>
+      <p class="team-bio">${clan.bio}</p>
+    `;
+    grid.appendChild(card);
+  });
+</script>
+
+<script src="js/nav.js"></script>
+</body>
+</html>
